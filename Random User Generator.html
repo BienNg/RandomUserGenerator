@@ -7,26 +7,35 @@
 
     	<script>
     		function generateUser(){
-    			document.getElementById("txtFirstName").innerHTML = "Vorname"
-    			document.getElementById("txtLastName").innerHTML = "Nachname"
-    			document.getElementById("txtTitle").innerHTML = "Titel"
-    			document.getElementById("txtAdress").innerHTML = "Adresse"
+
+                $.ajax({
+                    type: 'GET',
+                    url: 'https://randomuser.me/api/?nat=de',
+                    success: function(data) {
+                        document.getElementById("txtTitle").innerHTML = "Anrede: " + data["results"][0]["name"]["title"]
+                        document.getElementById("txtFirstName").innerHTML = "Vorname: " + data["results"][0]["name"]["first"]
+                        document.getElementById("txtLastName").innerHTML = "Nachname: " + data["results"][0]["name"]["last"]
+                        document.getElementById("txtLand").innerHTML = "Land: "  + data["results"][0]["nat"]
+                        document.getElementById("txtStadt").innerHTML = "Stadt: "  + data["results"][0]["location"]["city"]
+                        document.getElementById("txtStraße").innerHTML = "Straße: "  + data["results"][0]["location"]["street"]
+                        document.getElementById("txtPlz").innerHTML = "PLZ: "  + data["results"][0]["location"]["postcode"]
+                        document.getElementById("txtEmail").innerHTML = "Email: " 
+                                                                            + data["results"][0]["name"]["first"] + "." 
+                                                                            + data["results"][0]["name"]["last"] 
+                                                                            + data["results"][0]["nat"]
+                                                                            +"@webmail.diconium.com"
+                        document.getElementById("txtPsw").innerHTML = "Passwort: Test1234!"
+                    }
+                });
+        		}
+
+        		function clearUser(){
+        			document.getElementById("txtFirstName").innerHTML = ""
+        			document.getElementById("txtLastName").innerHTML = ""
+        			document.getElementById("txtTitle").innerHTML = ""
+                    document.getElementById("txtApiResponse").innerHTML = ""
     		}
 
-    		function clearUser(){
-    			document.getElementById("txtFirstName").innerHTML = ""
-    			document.getElementById("txtLastName").innerHTML = ""
-    			document.getElementById("txtTitle").innerHTML = ""
-    			document.getElementById("txtAdress").innerHTML = ""
-    		}
-
-    		$.ajax({
-                type: 'GET',
-                url: 'https://randomapi.com/api/c34sjue6?key=HFFJ-MTAV-F9Y3-2QV2',
-                success: function(data) {
-                    document.getElementById("txtApiResponse").innerHTML = JSON.stringify(data);
-                }
-            });
     	</script>
     </head>
 
@@ -38,7 +47,7 @@
     	The interface provides configuration options for: 
     	
     	<ul>
-    		<li>Gender</li>y
+    		<li>Gender</li>
     		<li>Country</li>
     		<li>Including/ Excluding fields</li>
     	</ul>
@@ -59,13 +68,17 @@
     		<li>Email address - @example.com is automatically replaced by @mailtest.dicomium.com</li>
     	</ul>
 
-    	<input type="button" class="floated" id="bttnGenerateUser" onclick="getUser()" value="Generate User"></input>
+    	<input type="button" class="floated" id="bttnGenerateUser" onclick="generateUser()" value="Generate User"></input>
     	<input type="button" class="floated" id="bttnClearUser" onclick="clearUser()" value="Clear User"></input>
+        <p id="txtTitle"></p>
     	<p id="txtFirstName"></p>
     	<p id="txtLastName"></p>
-    	<p id="txtTitle"></p>
-    	<p id="txtAdress"></p>
-        <p id="txtApiResponse"></p>
+    	<p id="txtLand"></p>
+        <p id="txtStadt"></p>
+        <p id="txtStraße"></p>
+        <p id="txtPlz"></p>
+        <p id="txtEmail"></p>
+        <p id="txtPsw"></p>
 
     </body>
 </html>
