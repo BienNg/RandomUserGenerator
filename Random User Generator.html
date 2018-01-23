@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+
+    <head>
+    	<title>Random User Generator</title>
+        <script src="jquery-3.3.1.min.js"></script>
+
+    	<script>
+    		function generateUser(){
+    			document.getElementById("txtFirstName").innerHTML = "Vorname"
+    			document.getElementById("txtLastName").innerHTML = "Nachname"
+    			document.getElementById("txtTitle").innerHTML = "Titel"
+    			document.getElementById("txtAdress").innerHTML = "Adresse"
+    		}
+
+    		function clearUser(){
+    			document.getElementById("txtFirstName").innerHTML = ""
+    			document.getElementById("txtLastName").innerHTML = ""
+    			document.getElementById("txtTitle").innerHTML = ""
+    			document.getElementById("txtAdress").innerHTML = ""
+    		}
+
+    		$.ajax({
+                type: 'GET',
+                url: 'https://randomapi.com/api/c34sjue6?key=HFFJ-MTAV-F9Y3-2QV2',
+                success: function(data) {
+                    document.getElementById("txtApiResponse").innerHTML = JSON.stringify(data);
+                }
+            });
+    	</script>
+    </head>
+
+    <body>
+    	<h1>Generate random user.</h1>
+
+    	<h2>Acceptance Criteria:</h2>
+
+    	The interface provides configuration options for: 
+    	
+    	<ul>
+    		<li>Gender</li>y
+    		<li>Country</li>
+    		<li>Including/ Excluding fields</li>
+    	</ul>
+
+    	The interface submits a REST API call to <a href = "https://randomuser.me/" target="_blank">randomuser.me<a> and then receives, processes and displays the result in human readable form:
+
+    	<ul>
+    		<li>Gender</li>
+    		<li>Salutation</li>
+    		<li>Title</li>
+    		<li>First Name</li>
+    		<li>Last Name</li>
+    		<li>Address</li>
+    		<li>Street Name</li>
+    		<li>Housenumber</li>
+    		<li>Postal Code</li>
+    		<li>City</li>
+    		<li>Email address - @example.com is automatically replaced by @mailtest.dicomium.com</li>
+    	</ul>
+
+    	<input type="button" class="floated" id="bttnGenerateUser" onclick="getUser()" value="Generate User"></input>
+    	<input type="button" class="floated" id="bttnClearUser" onclick="clearUser()" value="Clear User"></input>
+    	<p id="txtFirstName"></p>
+    	<p id="txtLastName"></p>
+    	<p id="txtTitle"></p>
+    	<p id="txtAdress"></p>
+        <p id="txtApiResponse"></p>
+
+    </body>
+</html>
