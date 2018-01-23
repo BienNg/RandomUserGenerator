@@ -5,6 +5,13 @@
     	<title>Random User Generator</title>
         <script src="jquery-3.3.1.min.js"></script>
 
+        <style type="text/css">
+            form{
+                margin-top: 10px;
+                margin-bottom: 10px;
+            }
+        </style>
+
     	<script>
     		function generateUser(){
 
@@ -30,10 +37,15 @@
         		}
 
         		function clearUser(){
-        			document.getElementById("txtFirstName").innerHTML = ""
-        			document.getElementById("txtLastName").innerHTML = ""
-        			document.getElementById("txtTitle").innerHTML = ""
-                    document.getElementById("txtApiResponse").innerHTML = ""
+                        document.getElementById("txtTitle").innerHTML = ""
+                        document.getElementById("txtFirstName").innerHTML = ""
+                        document.getElementById("txtLastName").innerHTML = ""
+                        document.getElementById("txtLand").innerHTML = ""
+                        document.getElementById("txtStadt").innerHTML = ""
+                        document.getElementById("txtStraße").innerHTML = ""
+                        document.getElementById("txtPlz").innerHTML = ""
+                        document.getElementById("txtEmail").innerHTML = "" 
+                        document.getElementById("txtPsw").innerHTML = ""
     		}
 
     	</script>
@@ -42,31 +54,13 @@
     <body>
     	<h1>Generate random user.</h1>
 
-    	<h2>Acceptance Criteria:</h2>
+        <h3>Geshhlecht</h3>
 
-    	The interface provides configuration options for: 
-    	
-    	<ul>
-    		<li>Gender</li>
-    		<li>Country</li>
-    		<li>Including/ Excluding fields</li>
-    	</ul>
-
-    	The interface submits a REST API call to <a href = "https://randomuser.me/" target="_blank">randomuser.me<a> and then receives, processes and displays the result in human readable form:
-
-    	<ul>
-    		<li>Gender</li>
-    		<li>Salutation</li>
-    		<li>Title</li>
-    		<li>First Name</li>
-    		<li>Last Name</li>
-    		<li>Address</li>
-    		<li>Street Name</li>
-    		<li>Housenumber</li>
-    		<li>Postal Code</li>
-    		<li>City</li>
-    		<li>Email address - @example.com is automatically replaced by @mailtest.dicomium.com</li>
-    	</ul>
+        <form >
+            <input type="radio" name="gender" value="random" checked="true">Zufällig<br>
+            <input type="radio" name="gender" value="male">Männlich<br>
+            <input type="radio" name="gender" value="female">Weiblich
+        </form>
 
     	<input type="button" class="floated" id="bttnGenerateUser" onclick="generateUser()" value="Generate User"></input>
     	<input type="button" class="floated" id="bttnClearUser" onclick="clearUser()" value="Clear User"></input>
@@ -80,5 +74,30 @@
         <p id="txtEmail"></p>
         <p id="txtPsw"></p>
 
+        <h2>Acceptance Criteria:</h2>
+
+        The interface provides configuration options for: 
+        
+        <ul>
+            <li>Gender</li>
+            <li>Country</li>
+            <li>Including/ Excluding fields</li>
+        </ul>
+
+        The interface submits a REST API call to <a href = "https://randomuser.me/" target="_blank">randomuser.me<a> and then receives, processes and displays the result in human readable form:
+
+        <ul>
+            <li>Gender</li>
+            <li>Salutation</li>
+            <li>Title</li>
+            <li>First Name</li>
+            <li>Last Name</li>
+            <li>Address</li>
+            <li>Street Name</li>
+            <li>Housenumber</li>
+            <li>Postal Code</li>
+            <li>City</li>
+            <li>Email address - @example.com is automatically replaced by @mailtest.dicomium.com</li>
+        </ul>
     </body>
 </html>
