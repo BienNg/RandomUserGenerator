@@ -15,9 +15,19 @@
     	<script>
     		function generateUser(){
 
+                var genderInput = document.forms["formGender"]["gender"].value
+                var myUrl = 'https://randomuser.me/api/?nat=de' 
+                console.log(genderInput)
+                if(genderInput == "male"){
+                    myUrl = 'https://randomuser.me/api/?nat=de&gender=male'    
+                }else if(genderInput == "female"){
+                    myUrl = 'https://randomuser.me/api/?nat=de&gender=female'
+                }
+                
+
                 $.ajax({
                     type: 'GET',
-                    url: 'https://randomuser.me/api/?nat=de',
+                    url: myUrl,
                     success: function(data) {
                         var anrede = data["results"][0]["name"]["title"]
                         var vorname = data["results"][0]["name"]["first"]
@@ -71,7 +81,7 @@
 
         <h3>Geshhlecht</h3>
 
-        <form >
+        <form name="formGender">
             <input type="radio" name="gender" value="random" checked="true">Zufällig<br>
             <input type="radio" name="gender" value="male">Männlich<br>
             <input type="radio" name="gender" value="female">Weiblich
