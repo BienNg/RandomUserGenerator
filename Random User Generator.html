@@ -5,26 +5,31 @@
     	<title>Random User Generator</title>
         <script src="jquery-3.3.1.min.js"></script>
 
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
         <style type="text/css">
             form{
                 margin-top: 10px;
                 margin-bottom: 10px;
+            }
+            body{
+                font-family: 'Roboto', sans-serif;
             }
         </style>
 
     	<script>
     		function generateUser(){
 
-                var genderInput = document.forms["formGender"]["gender"].value
-                var myUrl = 'https://randomuser.me/api/?nat=de' 
-                console.log(genderInput)
-                if(genderInput == "male"){
-                    myUrl = 'https://randomuser.me/api/?nat=de&gender=male'    
-                }else if(genderInput == "female"){
-                    myUrl = 'https://randomuser.me/api/?nat=de&gender=female'
-                }
+                var e = document.getElementById("selectNat")
+                var nat = e.options[e.selectedIndex].value
+                console.log(nat)
+                // Checking which gender is needed
+                var gender = document.forms["formGender"]["gender"].value
+                var myUrl = 'https://randomuser.me/api/?nat=' +  nat + '&gender=' + gender
+                console.log(gender)
                 
 
+                // Getting the user and fill in the fields
                 $.ajax({
                     type: 'GET',
                     url: myUrl,
@@ -34,6 +39,8 @@
                         var nachname = data["results"][0]["name"]["last"]
                         var land = data["results"][0]["nat"]
                         var stadt = data["results"][0]["location"]["city"]
+
+                        // Chankging the country and streetnames to uppercase
                         stadt = stadt.split(' ')
                         for (var i = 0; i < stadt.length; i++) {
                             stadt[i] = stadt[i].charAt(0).toUpperCase() + stadt[i].slice(1)
@@ -44,6 +51,11 @@
                             straße[i] = straße[i].charAt(0).toUpperCase() + straße[i].slice(1)
                         }    
 
+                        var email = data["results"][0]["name"]["first"] + "." 
+                                                                            + data["results"][0]["name"]["last"] 
+                                                                            + data["results"][0]["nat"]
+                                                                            +"@mailtest.dicomium.com"
+
                         document.getElementById("txtTitle").innerHTML = "Anrede: " + anrede.charAt(0).toUpperCase() + anrede.slice(1)
                         document.getElementById("txtFirstName").innerHTML = "Vorname: " + vorname.charAt(0).toUpperCase() + vorname.slice(1)
                         document.getElementById("txtLastName").innerHTML = "Nachname: " + nachname.charAt(0).toUpperCase() + nachname.slice(1)
@@ -51,11 +63,7 @@
                         document.getElementById("txtStadt").innerHTML = "Stadt: "  + stadt.join(" ")
                         document.getElementById("txtStraße").innerHTML = "Straße: "  + straße.join(" ")
                         document.getElementById("txtPlz").innerHTML = "PLZ: "  + data["results"][0]["location"]["postcode"]
-                        document.getElementById("txtEmail").innerHTML = "Email: " 
-                                                                            + data["results"][0]["name"]["first"] + "." 
-                                                                            + data["results"][0]["name"]["last"] 
-                                                                            + data["results"][0]["nat"]
-                                                                            +"@webmail.diconium.com"
+                        document.getElementById("txtEmail").innerHTML = "Email: " + email
                         document.getElementById("txtPsw").innerHTML = "Passwort: Test1234!"
                     }
                 });
@@ -77,15 +85,35 @@
     </head>
 
     <body>
-    	<h1>Generate random user.</h1>
+    	<h1>Generate random user:</h1>
 
-        <h3>Geshhlecht</h3>
+        <h3>Geschlecht</h3>
 
         <form name="formGender">
-            <input type="radio" name="gender" value="random" checked="true">Zufällig<br>
+            <input type="radio" name="gender" value="" checked="true">Zufällig<br>
             <input type="radio" name="gender" value="male">Männlich<br>
             <input type="radio" name="gender" value="female">Weiblich
         </form>
+
+        <select id="selectNat">
+            <option value="">Zufällig</option>
+            <option value="DE">Deutschland</option>
+            <option value="GB">England</option>
+            <option value="US">USA</option>
+            <option value="DK">Dänemark</option>
+            <option value="BR">Brasilien</option>
+            <option value="FI">Finnland</option>
+            <option value="FR">Frankreich</option>
+            <option value="IE">Irland</option>
+            <option value="IR">Iran</option>
+            <option value="CA">Kanada</option>
+            <option value="NL">Niederlande</option>
+            <option value="NZ">Neuseeland</option>
+            <option value="AU">Östereich</option>
+            <option value="CH">Scheweiz</option>
+            <option value="ES">Spanien</option>
+            <option value="TR">Türkei</option>
+        </select>
 
     	<input type="button" class="floated" id="bttnGenerateUser" onclick="generateUser()" value="Generate User"></input>
     	<input type="button" class="floated" id="bttnClearUser" onclick="clearUser()" value="Clear User"></input>
@@ -100,30 +128,6 @@
         <p id="txtEmail"></p>
         <p id="txtPsw"></p>
 
-        <h2>Acceptance Criteria:</h2>
-
-        The interface provides configuration options for: 
-        
-        <ul>
-            <li>Gender</li>
-            <li>Country</li>
-            <li>Including/ Excluding fields</li>
-        </ul>
-
-        The interface submits a REST API call to <a href = "https://randomuser.me/" target="_blank">randomuser.me<a> and then receives, processes and displays the result in human readable form:
-
-        <ul>
-            <li>Gender</li>
-            <li>Salutation</li>
-            <li>Title</li>
-            <li>First Name</li>
-            <li>Last Name</li>
-            <li>Address</li>
-            <li>Street Name</li>
-            <li>Housenumber</li>
-            <li>Postal Code</li>
-            <li>City</li>
-            <li>Email address - @example.com is automatically replaced by @mailtest.dicomium.com</li>
-        </ul>
+        <p>Powered by <a href="https://randomuser.me" target="_blank">https://randomuser.me</a></p>
     </body>
 </html>
