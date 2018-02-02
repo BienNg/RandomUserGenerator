@@ -19,12 +19,27 @@
                     type: 'GET',
                     url: 'https://randomuser.me/api/?nat=de',
                     success: function(data) {
-                        document.getElementById("txtTitle").innerHTML = "Anrede: " + data["results"][0]["name"]["title"]
-                        document.getElementById("txtFirstName").innerHTML = "Vorname: " + data["results"][0]["name"]["first"]
-                        document.getElementById("txtLastName").innerHTML = "Nachname: " + data["results"][0]["name"]["last"]
-                        document.getElementById("txtLand").innerHTML = "Land: "  + data["results"][0]["nat"]
-                        document.getElementById("txtStadt").innerHTML = "Stadt: "  + data["results"][0]["location"]["city"]
-                        document.getElementById("txtStraße").innerHTML = "Straße: "  + data["results"][0]["location"]["street"]
+                        var anrede = data["results"][0]["name"]["title"]
+                        var vorname = data["results"][0]["name"]["first"]
+                        var nachname = data["results"][0]["name"]["last"]
+                        var land = data["results"][0]["nat"]
+                        var stadt = data["results"][0]["location"]["city"]
+                        stadt = stadt.split(' ')
+                        for (var i = 0; i < stadt.length; i++) {
+                            stadt[i] = stadt[i].charAt(0).toUpperCase() + stadt[i].slice(1)
+                        }  
+                        var straße = data["results"][0]["location"]["street"]
+                        straße = straße.split(' ',)
+                        for (var i = 0; i < straße.length; i++) {
+                            straße[i] = straße[i].charAt(0).toUpperCase() + straße[i].slice(1)
+                        }    
+
+                        document.getElementById("txtTitle").innerHTML = "Anrede: " + anrede.charAt(0).toUpperCase() + anrede.slice(1)
+                        document.getElementById("txtFirstName").innerHTML = "Vorname: " + vorname.charAt(0).toUpperCase() + vorname.slice(1)
+                        document.getElementById("txtLastName").innerHTML = "Nachname: " + nachname.charAt(0).toUpperCase() + nachname.slice(1)
+                        document.getElementById("txtLand").innerHTML = "Land: "  + land
+                        document.getElementById("txtStadt").innerHTML = "Stadt: "  + stadt.join(" ")
+                        document.getElementById("txtStraße").innerHTML = "Straße: "  + straße.join(" ")
                         document.getElementById("txtPlz").innerHTML = "PLZ: "  + data["results"][0]["location"]["postcode"]
                         document.getElementById("txtEmail").innerHTML = "Email: " 
                                                                             + data["results"][0]["name"]["first"] + "." 
@@ -64,6 +79,7 @@
 
     	<input type="button" class="floated" id="bttnGenerateUser" onclick="generateUser()" value="Generate User"></input>
     	<input type="button" class="floated" id="bttnClearUser" onclick="clearUser()" value="Clear User"></input>
+        <h2>Benutzer: </h2>
         <p id="txtTitle"></p>
     	<p id="txtFirstName"></p>
     	<p id="txtLastName"></p>
