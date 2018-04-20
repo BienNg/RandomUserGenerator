@@ -1,13 +1,4 @@
-    <!doctype html>
-    <html>
-
-    <head>
-		 <title>Random User Generator</title>
-		 <script src="jquery-3.3.1.min.js"></script>
-
-		 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-		 <link rel="stylesheet" href="styles.css">
-		 <script>
+<script>
         function generateUser(){
             var e = document.getElementById("selectNat")
             var nat = e.options[e.selectedIndex].value
@@ -34,10 +25,10 @@
                                 for (var i = 0; i < stadt.length; i++) {
                                     stadt[i] = stadt[i].charAt(0).toUpperCase() + stadt[i].slice(1)
                                 }  
-                                var stra√üe = data["results"][0]["location"]["street"]
-                                stra√üe = stra√üe.split(' ',)
-                                for (var i = 0; i < stra√üe.length; i++) {
-                                    stra√üe[i] = stra√üe[i].charAt(0).toUpperCase() + stra√üe[i].slice(1)
+                                var straﬂe = data["results"][0]["location"]["street"]
+                                straﬂe = straﬂe.split(' ',)
+                                for (var i = 0; i < straﬂe.length; i++) {
+                                    straﬂe[i] = straﬂe[i].charAt(0).toUpperCase() + straﬂe[i].slice(1)
                                 }    
 
                                 var email = data["results"][0]["name"]["first"] + "-" 
@@ -50,7 +41,7 @@
                                 document.getElementById("txtLastName").innerHTML = "Nachname: " + nachname.charAt(0).toUpperCase() + nachname.slice(1)
                                 document.getElementById("txtLand").innerHTML = "Land: "  + land
                                 document.getElementById("txtStadt").innerHTML = "Stadt: "  + stadt.join(" ")
-                                document.getElementById("txtStra√üe").innerHTML = "Stra√üe: "  + stra√üe.join(" ")
+                                document.getElementById("txtStraﬂe").innerHTML = "Straﬂe: "  + straﬂe.join(" ")
                                 document.getElementById("txtPlz").innerHTML = "PLZ: "  + data["results"][0]["location"]["postcode"]
                                 document.getElementById("txtEmail").innerHTML = "Email: " + email
                                 document.getElementById("txtPsw").innerHTML = "Passwort: Test1234!"
@@ -64,7 +55,7 @@
                         document.getElementById("txtLastName").innerHTML = ""
                         document.getElementById("txtLand").innerHTML = ""
                         document.getElementById("txtStadt").innerHTML = ""
-                        document.getElementById("txtStra√üe").innerHTML = ""
+                        document.getElementById("txtStraﬂe").innerHTML = ""
                         document.getElementById("txtPlz").innerHTML = ""
                         document.getElementById("txtEmail").innerHTML = "" 
                         document.getElementById("txtPsw").innerHTML = ""
@@ -74,69 +65,3 @@
                       crear_select();
                   }
               </script>
-     
-	</head>
-
-          <body>
-           <h1>Generate random user:</h1>
-
-           <div id="">
-               <div id="">
-                   <h3>Geschlecht</h3>
-                   <label class="container">Zuf√§llig
-                    <input type="radio" name="gender" value="" class="checkmark" checked="true">
-                    <span class="checkmark"></span>
-                </label>
-                <label class="container">M√§nnlich
-                    <input type="radio" name="gender" value="male" class="checkmark">
-                    <span class="checkmark"></span>
-                </label>
-                <label class="container">
-                    <input type="radio" name="gender" value="female" class="checkmark">Weiblich
-                    <span class="checkmark"></span>                
-                </label>
-
-            </div>
-            <div id="">
-                <h3>Land</h3>
-                <select id="selectNat">
-                    <option value="">Zuf√§llig</option>
-                    <option value="DE">Deutschland</option>
-                    <option value="GB">England</option>
-                    <option value="US">USA</option>
-                    <option value="DK">D√§nemark</option>
-                    <option value="BR">Brasilien</option>
-                    <option value="FI">Finnland</option>
-                    <option value="FR">Frankreich</option>
-                    <option value="IE">Irland</option>
-                    <option value="IR">Iran</option>
-                    <option value="CA">Kanada</option>
-                    <option value="NL">Niederlande</option>
-                    <option value="NZ">Neuseeland</option>
-                    <option value="AU">√ñstereich</option>
-                    <option value="CH">Scheweiz</option>
-                    <option value="ES">Spanien</option>
-                    <option value="TR">T√ºrkei</option>
-                </select>
-            </div>
-        </div>
-
-
-
-        <div class="">
-            <input type="button"  id="bttnGenerateUser" onclick="generateUser()" value="Generate User"></input>
-            <input type="button" id="bttnClearUser" onclick="clearUser()" value="Clear User"></input>
-        </div>
-            <h2>Benutzer: </h2>
-            <p id="txtTitle"></p>
-            <p id="txtFirstName"></p>
-            <p id="txtLastName"></p>
-            <p id="txtLand"></p>
-            <p id="txtStadt"></p>
-            <p id="txtStra√üe"></p>
-            <p id="txtPlz"></p>
-            <p id="txtEmail"></p>
-            <p id="txtPsw"></p>
-        <p>Powered by <a href="https://randomuser.me" target="_blank">https://randomuser.me</a></p>
-    </body>
-    </html>

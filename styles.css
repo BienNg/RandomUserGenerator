@@ -1,104 +1,100 @@
-
-<style type="text/css">
-form{
-	margin-top: 10px;
-	margin-bottom: 10px;
-}
-
 body{
-	font-family: 'Roboto', sans-serif;
+  height: 100%;
+	font-family: 'Lato', sans-serif;
 }
 
-.icon_select_mate {
-	position: absolute;
-	top:20px;
-	right: 2%;
-	font-size: 16px;
-	height: 22px;
-	transition: all 275ms;
+
+h1, h2, h3, div, p ,form, label{
+	color: #AAAAAA;
 }
 
-.select_mate {
-	position: relative;
+.floated{
 	float: left;
-	min-width: 300px;
-	width: 300px;
-	min-height: 60px;
-	font-family: 'Roboto';
-	color: #777;
-	font-weight: 300;
-	background-color: #fff;
-	box-shadow: 1px 2px 10px -2px rgba(0,0,0,0.3);
-	border-radius: 3px;
-	transition: all 375ms ease-in-out;
-	/* Oculto el elemento select */
-	select {
-		position: absolute;
-		overflow: hidden;
-		height: 0px;
-		opacity: 0;  
-		z-index: -1;
-	}
 }
 
-.cont_list_select_mate {
-	position: relative;
-	float: left;
-	width: 100%;
+
+/* The container */
+.container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
-.cont_select_int {
-	position: absolute;
-	left: 0px;
-	top: 0px;
-	z-index: 999;
-	overflow: hidden;
-	height: 0px;
-	width: 100%;
-	background-color: #fff;
-	padding: 0px;
-	margin-bottom: 0px;
-	margin-top: 0px;
-	border-radius: 0px 0px 3px 3px;
-	box-shadow: 1px 4px 10px -2px rgba(0, 0, 0, 0.2);
-	transition: all 375ms ease-in-out;
-
-	li {
-		position: relative;
-		float: left;
-		width: 96%;
-		border-bottom:1px solid #E0E0E0;
-		background-color: #F5F5F5;
-		list-style-type: none;
-		padding: 10px 2%;
-		margin: 0px;  
-		transition: all 275ms ease-in-out;
-		display: block;
-		cursor:pointer;
-		
-		&:last-child {
-			border-radius: 3px;
-			border-bottom:0px; 
-
-		}
-		&:hover {
-			background-color: #EEEEEE;
-		} 
-	}
-
-	.active {
-		background-color: #EEEEEE;
-	}
-
+/* Hide the browser's default checkbox */
+.container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
 }
 
-/* etiqueta <p> con la opcion selecionada  */
-.selecionado_opcion {
-	padding: 20px 2%;
-	width: 96%;
-	display: block;
-	margin: 0px;
-	cursor: pointer;
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
 }
 
-</style>
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.container input:checked ~ .checkmark {
+    background-color: #2196F3;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+
+/* Style the indicator (dot/circle) */
+.container .checkmark:after {
+ 	top: 9px;
+	left: 9px;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: white;
+}
+
+/* Div to align its child side by side*/
+#sideBySide{
+  position:absolute;
+  border:1px solid black;
+  padding:10px;
+}
+#sideBySide > div{
+  float:right;
+  margin:10px;
+}
+
+#divGeschlecht{
+  border:1px solid red;
+}
+#divLand{
+  border:1px solid blue;
+}
+.divClear{
+	border: 2px solid grey
+	clear: both;
+}

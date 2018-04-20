@@ -1,0 +1,150 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Random User Generator</title>
+    <script src="jquery-3.3.1.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="styles2.css">
+
+    <script>
+        function generateUser() {
+            var e = document.getElementById("selectNat")
+            var nat = e.options[e.selectedIndex].value
+            console.log(nat)
+            // Checking which gender is needed
+            var gender = document.querySelector('input[name="gender"]:checked').value;
+            var myUrl = 'https://randomuser.me/api/?nat=' + nat + '&gender=' + gender
+            console.log(gender)
+
+
+            // Getting the user and fill in the fields
+            $.ajax({
+                type: 'GET',
+                url: myUrl,
+                success: function (data) {
+                    var anrede = data["results"][0]["name"]["title"]
+                    var vorname = data["results"][0]["name"]["first"]
+                    var nachname = data["results"][0]["name"]["last"]
+                    var land = data["results"][0]["nat"]
+                    var stadt = data["results"][0]["location"]["city"]
+
+                    // Chankging the country and streetnames to uppercase
+                    stadt = stadt.split(' ')
+                    for (var i = 0; i < stadt.length; i++) {
+                        stadt[i] = stadt[i].charAt(0).toUpperCase() + stadt[i].slice(1)
+                    }
+                    var straße = data["results"][0]["location"]["street"]
+                    straße = straße.split(' ', )
+                    for (var i = 0; i < straße.length; i++) {
+                        straße[i] = straße[i].charAt(0).toUpperCase() + straße[i].slice(1)
+                    }
+
+                    var email = data["results"][0]["name"]["first"] + "-"
+                        + data["results"][0]["name"]["last"]
+                        + data["results"][0]["nat"]
+                        + "@mailtest.diconium.com"
+
+                    document.getElementById("txtTitle").innerHTML = anrede.charAt(0).toUpperCase() + anrede.slice(1)
+                    document.getElementById("txtFirstName").innerHTML = vorname.charAt(0).toUpperCase() + vorname.slice(1)
+                    document.getElementById("txtLastName").innerHTML = nachname.charAt(0).toUpperCase() + nachname.slice(1)
+                    document.getElementById("txtLand").innerHTML = land
+                    document.getElementById("txtStadt").innerHTML = stadt.join(" ")
+                    document.getElementById("txtStraße").innerHTML = straße.join(" ")
+                    document.getElementById("txtPlz").innerHTML = data["results"][0]["location"]["postcode"]
+                    document.getElementById("txtEmail").innerHTML = email
+                    document.getElementById("txtPsw").innerHTML = "Passwort: Test1234!"
+                }
+            });
+        }
+
+        function clearUser() {
+            document.getElementById("txtTitle").innerHTML = ""
+            document.getElementById("txtFirstName").innerHTML = ""
+            document.getElementById("txtLastName").innerHTML = ""
+            document.getElementById("txtLand").innerHTML = ""
+            document.getElementById("txtStadt").innerHTML = ""
+            document.getElementById("txtStraße").innerHTML = ""
+            document.getElementById("txtPlz").innerHTML = ""
+            document.getElementById("txtEmail").innerHTML = ""
+            document.getElementById("txtPsw").innerHTML = ""
+        }
+
+        window.onload = function () {
+            crear_select();
+        }
+    </script>
+</head>
+
+<body>
+    <div class="options_section">
+
+        <h1>Generate random User</h1>
+        <div class="div_options">
+
+            <div class="div_sex_sel">
+                <h3>Geschlecht</h3>
+                <label class="container_radio">
+                    Zufällig
+                    <input type="radio" name="gender" value="" checked="true">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="container_radio">
+                    Männlich
+                    <input type="radio" name="gender" value="male" </label>
+                    <span class="checkmark"></span>
+                    <label class="container_radio">
+                        Weiblich
+                        <input type="radio" name="gender" value="female" </label>
+                        <span class="checkmark"></span>
+            </div>
+
+
+            <div class="div_country_sel">
+                <h3>Land</h3>
+                <select id="selectNat">
+                    <option value="">Zufällig</option>
+                    <option value="DE">Deutschland</option>
+                    <option value="GB">England</option>
+                    <option value="US">USA</option>
+                    <option value="DK">Dänemark</option>
+                    <option value="BR">Brasilien</option>
+                    <option value="FI">Finnland</option>
+                    <option value="FR">Frankreich</option>
+                    <option value="IE">Irland</option>
+                    <option value="IR">Iran</option>
+                    <option value="CA">Kanada</option>
+                    <option value="NL">Niederlande</option>
+                    <option value="NZ">Neuseeland</option>
+                    <option value="AU">Östereich</option>
+                    <option value="CH">Scheweiz</option>
+                    <option value="ES">Spanien</option>
+                    <option value="TR">Türkei</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="gen_buttons">
+        <input type="button" class="button" id="bttnGenerateUser" onclick="generateUser()" value="Generate User"></input>
+        <input type="button" class="button" id="bttnClearUser" onclick="clearUser()" value="Clear User"></input>
+    </div>
+    <div class="user_section">
+        <h2>Benutzer: </h2>
+        <p id="txtTitle"></p>
+        <p id="txtFirstName"></p>
+        <p id="txtLastName"></p>
+        <p id="txtLand"></p>
+        <p id="txtStadt"></p>
+        <p id="txtStraße"></p>
+        <p id="txtPlz"></p>
+        <p id="txtEmail"></p>
+        <p id="txtPsw"></p>
+    </div>
+    <p>Powered by
+        <a href="https://randomuser.me" target="_blank">https://randomuser.me</a>
+    </p>
+
+</body>
+
+</html>
